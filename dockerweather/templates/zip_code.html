@@ -56,7 +56,16 @@
     <div class="container">
 
       <div class="dockerweather">
-        <h1>Weather For {{ geo_dict['zip_code'] }}</h1>
+        {% if method == 'GET' %}
+        <h1>Weather By Zip Code</h1>
+        <form action="{{ url_for('zip_code') }}" method="post">
+          Please enter a zip code to retrieve the weather:<br><br>
+          Zip Code:<br>
+          <input type="text" name="zip"><br>
+          <input type="submit" value="Submit">
+        </form>
+        {% elif method == 'POST' %}
+        <h1>Weather For {{ zip_code }}</h1>
         <p class="lead">
           {% if weather_dict['weather'][0]['description'] %}
           Description: {{ weather_dict['weather'][0]['description'] }}<br>
@@ -88,25 +97,17 @@
         </p>
         <h2>Additional Info</h2>
         <p class="lead">
-          {% if geo_dict['ip'] %}
-          IP address: {{ geo_dict['ip'] }}<br>
+          {% if weather_dict['coord']['lat'] %}
+          Latitude: {{ weather_dict['coord']['lat'] }}<br>
           {% endif %}
-          {% if geo_dict['latitude'] %}
-          Latitude: {{ geo_dict['latitude'] }}<br>
+          {% if weather_dict['coord']['lon'] %}
+          Longitude: {{ weather_dict['coord']['lon'] }}<br>
           {% endif %}
-          {% if geo_dict['longitude'] %}
-          Longitude: {{ geo_dict['longitude'] }}<br>
-          {% endif %}
-          {% if geo_dict['city'] %}
-          City: {{ geo_dict['city'] }}<br>
-          {% endif %}
-          {% if geo_dict['region_name'] %}
-          State: {{ geo_dict['region_name'] }}<br>
-          {% endif %}
-          {% if geo_dict['country_name'] %}
-          Country: {{ geo_dict['country_name'] }}<br>
+          {% if weather_dict['name'] %}
+          City Name: {{ weather_dict['name'] }}<br>
           {% endif %}
         </p>
+        {% endif %}
       </div>
 
     </div><!-- /.container -->
