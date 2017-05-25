@@ -12,6 +12,10 @@ dockerweather.py script with the following format:
     [open weather map]
     api_key=<api key>
 
+Install any required python libraries:
+
+    pip install -r requirements.txt
+    
 Then you can run it with the following command:
 
     python dockerweather/dockerweather.py
