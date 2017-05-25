@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Virtual Environment for dockerweather
+/dockerweatherenv/
